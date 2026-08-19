@@ -29,23 +29,14 @@ counts_matrix <- read.table(counts_file,
 # ------------------------------------------------------------------------------
 # 2. METADATA CREATION (colData)
 # ------------------------------------------------------------------------------
-# Define barcode lists according to study groups (excluding outliers)
-b1_list <- c("bc01","bc04","bc07","bc10","bc13")
-b2_list <- c("bc05","bc08","bc11","bc14","bc16")
-gc_list <- c("bc06","bc12","bc15","bc17")
+# Read metadata from external file
+col_data <- read.csv("metadata/deseq2_design.csv", row.names = 1)
 
-# Create metadata dataframe
-col_data <- data.frame(barcode = colnames(counts_matrix)) %>%
-  mutate(tejido = case_when(
-    barcode %in% b1_list ~ "B1",
-    barcode %in% b2_list ~ "B2",
-    barcode %in% gc_list ~ "GC",
-    TRUE ~ "Other"
-  )) %>%
-  column_to_rownames("barcode")
-
-# Force factor conversion and set GC (Control Group) as the reference level
+# Ensure 'tejido' is a factor and set GC (Control Group) as the reference level
 col_data$tejido <- factor(col_data$tejido, levels = c("GC", "B1", "B2"))
+
+# Check that the rownames of col_data match the colnames of counts_matrix
+all(rownames(col_data) %in% colnames(counts_matrix))
 
 # ------------------------------------------------------------------------------
 # 3. DESeq2 OBJECT CONSTRUCTION
