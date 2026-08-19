@@ -1,4 +1,4 @@
-# FMR1 Isoform Detection and Differential Expression Pipeline
+# *FMR1* Isoform Detection and Differential Expression Pipeline
 
 ## Overview
 This repository contains the bioinformatics pipeline and custom scripts used for the characterization of alternative splicing and isoform diversity of the *FMR1* gene using Oxford Nanopore Technologies (ONT) long-read sequencing. 
