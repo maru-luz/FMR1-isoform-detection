@@ -30,7 +30,7 @@ REF_MMI="Homo_sapiens.GRCh38.dna.primary_assembly.mmi"
 REF_GTF="Homo_sapiens.GRCh38.115.gtf"
 
 # Paths to data
-RAW_FASTQ="barcode${BARCODE}-trimmed-ok.fastq"
+RAW_FASTQ="barcode${BARCODE}.fastq"
 MAPPED_SAM="bc${BARCODE}-mapped.sam"
 SORTED_BAM="bc${BARCODE}-mapped.sorted.bam"
 OUTPUT_BED="bc${BARCODE}.bed12"
