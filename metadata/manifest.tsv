@@ -1,0 +1,17 @@
+B1_A	isoform	/collapse/bc01.isoforms.bed	/collapse/bc01.isoforms.fa	/collapse/bc01.isoform.read.map.txt
+B2_A	isoform	/collapse/bc02.isoforms.bed	/collapse/bc02.isoforms.fa	/collapse/bc02.isoform.read.map.txt
+GC_A	isoform	/collapse/bc03.isoforms.bed	/collapse/bc03.isoforms.fa	/collapse/bc03.isoform.read.map.txt
+B1_B	isoform	/collapse/bc04.isoforms.bed	/collapse/bc04.isoforms.fa	/collapse/bc04.isoform.read.map.txt
+B2_B	isoform	/collapse/bc05.isoforms.bed	/collapse/bc05.isoforms.fa	/collapse/bc05.isoform.read.map.txt
+GC_B	isoform	/collapse/bc06.isoforms.bed	/collapse/bc06.isoforms.fa	/collapse/bc06.isoform.read.map.txt
+B1_D	isoform	/collapse/bc07.isoforms.bed	/collapse/bc07.isoforms.fa	/collapse/bc07.isoform.read.map.txt
+B2_D	isoform	/collapse/bc08.isoforms.bed	/collapse/bc08.isoforms.fa	/collapse/bc08.isoform.read.map.txt
+GC_D	isoform	/collapse/bc09.isoforms.bed	/collapse/bc09.isoforms.fa	/collapse/bc09.isoform.read.map.txt
+B1_C	isoform	/collapse/bc10.isoforms.bed	/collapse/bc10.isoforms.fa	/collapse/bc10.isoform.read.map.txt
+B2_C	isoform	/collapse/bc11.isoforms.bed	/collapse/bc11.isoforms.fa	/collapse/bc11.isoform.read.map.txt
+GC_C	isoform	/collapse/bc12.isoforms.bed	/collapse/bc12.isoforms.fa	/collapse/bc12.isoform.read.map.txt
+B1_E	isoform	/collapse/bc13.isoforms.bed	/collapse/bc13.isoforms.fa	/collapse/bc13.isoform.read.map.txt
+B2_Ea	isoform	/collapse/bc14.isoforms.bed	/collapse/bc14.isoforms.fa	/collapse/bc14.isoform.read.map.txt
+GC_Ea	isoform	/collapse/bc15.isoforms.bed	/collapse/bc15.isoforms.fa	/collapse/bc15.isoform.read.map.txt
+B2_Eb	isoform	/collapse/bc16.isoforms.bed	/collapse/bc16.isoforms.fa	/collapse/bc16.isoform.read.map.txt
+GC_Eb	isoform	/collapse/bc17.isoforms.bed	/collapse/bc17.isoforms.fa	/collapse/bc17.isoform.read.map.txt
