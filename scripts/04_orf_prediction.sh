@@ -11,6 +11,9 @@
 # The resulting predicted protein sequences (.pep files) were subsequently 
 # subjected to ClustalW alignment, NMD evaluation, and domain mapping 
 # using the InterProScan web service as described in the manuscript.
+
+# Requirements: 
+# - TransDecoder2 
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
