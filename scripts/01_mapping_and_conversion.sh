@@ -14,8 +14,9 @@
 # Ensembl GTF annotation.
 #
 # Requirements: 
-# - dorado (v0.9.1)
-# - conda environment containing minimap2 and bedtools (e.g., 'minimap2' env)
+# - dorado 
+# - minimap2 
+# - bedtools 
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
