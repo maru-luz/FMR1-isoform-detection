@@ -35,7 +35,6 @@ The following parameters are specific to the study described in the associated m
 * **Reference genome:** Ensembl GRCh38 primary assembly, release 115
 * **Biological groups:** Blood pre-stimulation (B1), Blood post-stimulation (B2), and Granulosa Cells (GC)
 * **Outlier samples excluded:** barcodes 02, 03, and 09 (identified by PCA-based unsupervised clustering)
-* **Software versions:** Dorado v0.9.1, SAMtools v1.18, BEDtools v2.31.1, FLAIR v2.0.0 (correct/collapse) and v2.2.0 (combine)
 
 ## Software Requirements
 | Tool | Version |
