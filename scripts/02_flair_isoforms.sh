@@ -6,6 +6,10 @@
 # This script uses FLAIR to correct splice junctions based on genome annotation,
 # collapses reads into high-confidence isoforms, and merges sample-specific 
 # transcriptomes. 
+
+# Requirements: 
+# - FLAIR 
+
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
