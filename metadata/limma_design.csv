@@ -1,13 +1,17 @@
-barcode, tissue, woman
-bc01, B1, A
-bc04, B1, B
-bc05, B2, B
-bc06, GC, B
-bc07, B1, D
-bc08, B2, D
-bc10, B1, C
-bc11, B2, C
-bc12, GC, C
-bc13, B1, E
-E_B2, B2, E
-E_GC, GC, E
+barcode,tissue,woman,rep_group,final_id
+bc01,B1,A,,bc01
+bc04,B1,B,,bc04
+bc05,B2,B,,bc05
+bc06,GC,B,,bc06
+bc07,B1,D,,bc07
+bc08,B2,D,,bc08
+bc10,B1,C,,bc10
+bc11,B2,C,,bc11
+bc12,GC,C,,bc12
+bc13,B1,E,,bc13
+bc14,B2,E,E_B2,
+bc16,B2,E,E_B2,
+bc15,GC,E,E_GC,
+bc17,GC,E,E_GC,
+E_B2,B2,E,,E_B2
+E_GC,GC,E,,E_GC
