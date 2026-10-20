@@ -41,43 +41,52 @@ counts_matrix <- read.table(counts_file,
   as.matrix()
 
 # ------------------------------------------------------------------------------
-# 2. AVERAGE TECHNICAL REPLICATES FROM DONOR E
+# 2. AVERAGE TECHNICAL REPLICATES FROM WOMAN E
 # ------------------------------------------------------------------------------
+# The metadata file (limma_design.csv) specifies which samples are technical
+# replicates (rep_group column). Samples with the same rep_group value are
+# averaged into a single sample before analysis.
 # Woman E contributed technical replicates for B2 (bc14, bc16) and GC (bc15,
 # bc17). These are averaged to a single value per tissue type per woman to
 # avoid inflating the intra-woman correlation estimate in duplicateCorrelation.
 
-E_B2 <- round(rowMeans(counts_matrix[, c("bc14", "bc16")]))
-E_GC <- round(rowMeans(counts_matrix[, c("bc15", "bc17")]))
+metadata_raw <- read.csv("metadata/limma_design.csv")
 
-counts_matrix <- counts_matrix[, !colnames(counts_matrix) %in%
-                                   c("bc14", "bc15", "bc16", "bc17")]
-counts_matrix <- cbind(counts_matrix, E_B2 = E_B2, E_GC = E_GC)
+# Identify replicate groups and average them
+rep_groups <- metadata_raw %>%
+  filter(!is.na(rep_group)) %>%
+  group_by(rep_group) %>%
+  summarise(barcodes = list(barcode), .groups = "drop")
 
-cat("Samples after averaging woman E replicates:", colnames(counts_matrix), "\n\n")
+for(i in seq_len(nrow(rep_groups))){
+  grp      <- rep_groups$rep_group[i]
+  barcodes <- unlist(rep_groups$barcodes[i])
+  averaged <- round(rowMeans(counts_matrix[, barcodes]))
+  counts_matrix <- counts_matrix[, !colnames(counts_matrix) %in% barcodes]
+  counts_matrix <- cbind(counts_matrix, setNames(data.frame(averaged), grp))
+}
+
+cat("Samples after averaging technical replicates:", colnames(counts_matrix), "\n\n")
 
 # ------------------------------------------------------------------------------
-# 3. METADATA CREATION
+# 3. METADATA LOADING
 # ------------------------------------------------------------------------------
-# Tissue and woman assignments for each sample (post-averaging)
-col_data <- data.frame(
-  barcode = colnames(counts_matrix),
-  tissue  = c("B1", "B1", "B2", "GC",   # bc01(A), bc04(B), bc05(B), bc06(B)
-              "B1", "B2",               # bc07(D), bc08(D)
-              "B1", "B2", "GC",         # bc10(C), bc11(C), bc12(C)
-              "B1", "B2", "GC"),        # bc13(E), E_B2, E_GC
-  woman   = c("A", "B", "B", "B",
-              "D", "D",
-              "C", "C", "C",
-              "E", "E", "E"),
-  row.names = NULL
-) %>% column_to_rownames("barcode")
+# Read metadata for the final (post-averaging) sample set
+col_data <- read.csv("metadata/limma_design.csv") %>%
+  filter(!is.na(final_id)) %>%        # keep only final (post-averaging) rows
+  select(final_id, tissue, woman) %>%
+  distinct() %>%
+  column_to_rownames("final_id")
+
+# Reorder rows to match column order of counts_matrix
+col_data <- col_data[colnames(counts_matrix), , drop = FALSE]
 
 col_data$tissue <- factor(col_data$tissue, levels = c("GC", "B1", "B2"))
 col_data$woman  <- factor(col_data$woman)
 
 # Verify sample alignment
 stopifnot(all(colnames(counts_matrix) == rownames(col_data)))
+cat("Metadata loaded successfully.\n\n")
 
 # ------------------------------------------------------------------------------
 # 4. NORMALIZATION
@@ -88,7 +97,7 @@ dge <- calcNormFactors(dge)
 # ------------------------------------------------------------------------------
 # 5. DESIGN MATRIX
 # ------------------------------------------------------------------------------
-# Woman is NOT included in the design formula, its contribution is accounted
+# Woman is NOT included in the design formula — its contribution is accounted
 # for via duplicateCorrelation (random effect approximation)
 design <- model.matrix(~ tissue, data = col_data)
 
