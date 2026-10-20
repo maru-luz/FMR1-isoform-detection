@@ -1,0 +1,13 @@
+barcode, tissue, woman
+bc01, B1, A
+bc04, B1, B
+bc05, B2, B
+bc06, GC, B
+bc07, B1, D
+bc08, B2, D
+bc10, B1, C
+bc11, B2, C
+bc12, GC, C
+bc13, B1, E
+E_B2, B2, E
+E_GC, GC, E
