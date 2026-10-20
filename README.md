@@ -9,7 +9,7 @@ Raw long-read sequencing data generated for this study has been deposited in the
 ## Experimental Metadata
 The metadata required to reproduce the analysis is provided in the `metadata/` directory:
 * [Execution Manifest](./metadata/manifest.tsv): Contains sample IDs and FASTQ file paths required for the FLAIR pipeline.
-* [Experimental Design](./metadata/deseq2_design.csv): Maps individual barcodes to their corresponding biological groups for differential expression analysis.
+* [Experimental Design](./metadata/limma_design.csv): Maps individual barcodes to their corresponding biological groups and woman IDs for differential expression analysis.
 
 ## Bioinformatics Workflow
 
@@ -23,7 +23,7 @@ Uses FLAIR to correct splice junctions against the reference annotation, collaps
 
 **Script 3 — Differential Transcript Expression (DTE)**
 [`03_differential_expression.R`](./scripts/03_differential_expression.R)
-R script utilizing DESeq2 to identify differentially expressed *FMR1* isoforms across biological groups. Requires the filtered count matrix (`filtered_isoforms.tsv`) and the experimental design file (`metadata/deseq2_design.csv`).
+R script performing differential transcript expression analysis using limma-voom with `duplicateCorrelation` to account for the repeated-measures structure of the design (multiple samples per woman). Since QC-based exclusion of samples from women A and D resulted in an incomplete block design, the intra-woman correlation was estimated using `duplicateCorrelation` rather than including woman as a fixed effect. Technical replicates from woman E were averaged prior to analysis. Both voom and `duplicateCorrelation` were applied in two iterative rounds as recommended in the limma documentation (Ritchie et al., *NAR* 2015). Requires the filtered count matrix (`filtered_isoforms.tsv`).
 
 **Script 4 — ORF Prediction**
 [`04_orf_prediction.sh`](./scripts/04_orf_prediction.sh)
@@ -46,7 +46,8 @@ The following parameters are specific to the study described in the associated m
 | FLAIR correct/collapse | v2.0.0 |
 | FLAIR combine | v2.2.0 |
 | R | 4.6.0 |
-| DESeq2 | 1.52.0 |
+| limma | 3.68.4 |
+| edgeR | 4.10.1 |
 | TransDecoder | v2 |
 
 ## Citation
